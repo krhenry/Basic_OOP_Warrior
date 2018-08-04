@@ -1,13 +1,14 @@
 ﻿using Battle.Enum;
 using Battle.Equipment;
 using System;
+using System.Threading;
 
 namespace Battle
 {
     class Warrior
     {
-        private const int GOOD_GUY_STARTING_HEALTH = 100;
-        private const int BAD_GUY_STARTING_HEALTH = 100;
+        private const int GOOD_GUY_STARTING_HEALTH = 20;
+        private const int BAD_GUY_STARTING_HEALTH = 20;
 
         private readonly Faction FACTION;
 
@@ -60,9 +61,15 @@ namespace Battle
             if (enemy.health <= 0)
             {
                 enemy.isAlive = false;
-                Console.WriteLine($"{enemy.name} is dead! {name} is victorious!");
+                Tools.ColorfulWriteLine($"{enemy.name} is dead!", ConsoleColor.Red);
+                Tools.ColorfulWriteLine($"{name} is victorious!", ConsoleColor.Green);
                 Console.ReadLine();
+            } else
+            {
+                Console.WriteLine($"{name} attacked {enemy.name}. {damage} damage was inflicted to {enemy.name}, remaining health of {enemy.name} is {enemy.health}");
             }
+
+            Thread.Sleep(200);
         }
     }
 }
