@@ -1,5 +1,6 @@
 ﻿using Battle.Enum;
 using Battle.Equipment;
+using System;
 
 namespace Battle
 {
@@ -47,6 +48,20 @@ namespace Battle
                     break;
                 default:
                     break;
+            }
+        }
+
+        public void Attack(Warrior enemy)
+        {
+            int damage = weapon.Damage / enemy.armor.ArmorPoints;
+
+            enemy.health -= damage;
+
+            if (enemy.health <= 0)
+            {
+                enemy.isAlive = false;
+                Console.WriteLine($"{enemy.name} is dead! {name} is victorious!");
+                Console.ReadLine();
             }
         }
     }
